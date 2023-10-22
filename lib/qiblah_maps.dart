@@ -39,16 +39,14 @@ class _QiblahMapsState extends State<QiblahMaps> {
       child: FutureBuilder(
         future: _future,
         builder: (_, AsyncSnapshot<Position?> snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting)
-            return LoadingIndicator();
+          if (snapshot.connectionState == ConnectionState.waiting) return LoadingIndicator();
           if (snapshot.hasError)
             return LocationErrorWidget(
               error: snapshot.error.toString(),
             );
 
           if (snapshot.data != null) {
-            final loc =
-                LatLng(snapshot.data!.latitude, snapshot.data!.longitude);
+            final loc = LatLng(snapshot.data!.latitude, snapshot.data!.longitude);
             position = loc;
           } else
             _positionStream.sink.add(position);
@@ -88,11 +86,9 @@ class _QiblahMapsState extends State<QiblahMaps> {
                     circleId: CircleId("Circle"),
                     radius: 10,
                     center: position,
-                    fillColor:
-                        Theme.of(context).primaryColorLight.withAlpha(100),
+                    fillColor: Theme.of(context).primaryColorLight.withAlpha(100),
                     strokeWidth: 1,
-                    strokeColor:
-                        Theme.of(context).primaryColorDark.withAlpha(100),
+                    strokeColor: Theme.of(context).primaryColorDark.withAlpha(100),
                     zIndex: 3,
                   )
                 ],
